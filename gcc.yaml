@@ -1,0 +1,96 @@
+package:
+  name: gcc
+  version: 12.2.0
+  epoch: 0
+  description: "the GNU compiler collection (cross compilation)"
+  target-architecture:
+    - all
+  copyright:
+    - paths:
+      - "*"
+      attestation: TODO
+      license: GPL-3.0-or-later
+  dependencies:
+    runtime:
+
+environment:
+  contents:
+    repositories:
+      - https://dl-cdn.alpinelinux.org/alpine/edge/main
+      - https://packages.wolfi.dev/bootstrap/stage1
+    keyring:
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-4a6a0840.rsa.pub
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-5261cecb.rsa.pub
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-6165ee59.rsa.pub
+      - https://packages.wolfi.dev/bootstrap/stage1/melange.rsa.pub
+    packages:
+      - alpine-baselayout-data
+      - busybox
+      - build-base
+      - scanelf
+      - ssl_client
+      - ca-certificates-bundle
+      - texinfo
+      - gawk
+      - bison
+      - flex
+      - gmp-dev
+      - mpfr-dev
+      - mpc1-dev
+      - isl-dev
+      - zlib-dev
+      - cross-binutils-stage1
+      - cross-gcc-stage1
+      - cross-libstdc++-stage1
+      - cross-glibc-stage1
+      - cross-gmp
+      - cross-mpfr
+      - cross-mpc
+      - cross-isl
+      - cross-zlib
+      - cross-linux-headers
+
+pipeline:
+  - uses: fetch
+    with:
+      uri: https://gcc.gnu.org/pub/gcc/releases/gcc-${{package.version}}/gcc-${{package.version}}.tar.gz
+      expected-sha256: ac6b317eb4d25444d87cf29c0d141dedc1323a1833ec9995211b13e1a851261c
+  - name: 'Set up build directory'
+    runs: |
+      mkdir build
+  - name: 'Configure GCC'
+    runs: |
+      cd build
+      ../configure \
+        --build=$(uname -m)-alpine-linux-musl \
+        --host=$(uname -m)-pc-linux-gnu \
+        --target=$(uname -m)-pc-linux-gnu \
+        --prefix=/usr \
+        --with-build-sysroot=/usr/$(uname -m)-pc-linux-gnu \
+        --disable-nls \
+        --disable-werror \
+        --with-glibc-version=2.35 \
+        --enable-initfini-array \
+        --disable-nls \
+        --disable-shared \
+        --disable-multilib \
+        --disable-libcc1 \
+        --disable-decimal-float \
+        --disable-threads \
+        --disable-libatomic \
+        --disable-libgomp \
+        --disable-libquadmath \
+        --disable-libssp \
+        --disable-libvtv \
+        --disable-libstdcxx \
+        --enable-languages=c,c++
+  - runs: |
+      make -C build -j$(nproc)
+  - runs: |
+      make -C build -j$(nproc) install DESTDIR="${{targets.destdir}}"
+  - runs: |
+      ln -s gcc ${{targets.destdir}}/usr/bin/cc
+  - name: 'Clean up documentation'
+    runs: |
+      rm -rf ${{targets.destdir}}/usr/share/info
+  - uses: strip
