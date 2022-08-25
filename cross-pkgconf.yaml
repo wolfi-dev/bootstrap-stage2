@@ -1,0 +1,37 @@
+package:
+  name: cross-pkgconf
+  version: 1
+  epoch: 0
+  description: "pkgconf cross-compilation personality"
+  target-architecture:
+    - all
+  copyright:
+    - paths:
+      - "*"
+      attestation: TODO
+      license: MIT
+  dependencies:
+    runtime:
+      - pkgconf
+
+environment:
+  contents:
+    repositories:
+      - https://dl-cdn.alpinelinux.org/alpine/edge/main
+    keyring:
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-4a6a0840.rsa.pub
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-5261cecb.rsa.pub
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-6165ee59.rsa.pub
+    packages:
+      - alpine-baselayout
+      - busybox
+      - ssl_client
+
+pipeline:
+  - name: Install
+    runs: |
+      mkdir -p "${{targets.destdir}}"/usr/bin
+      mkdir -p "${{targets.destdir}}"/usr/share/pkgconfig/personality.d
+      install -m644 $(uname -m)-pc-linux-gnu.personality \
+        "${{targets.destdir}}"/usr/share/pkgconfig/personality.d/$(uname -m)-pc-linux-gnu.personality
+      ln -sf /usr/bin/pkgconf "${{targets.destdir}}"/usr/bin/$(uname -m)-pc-linux-gnu-pkg-config
