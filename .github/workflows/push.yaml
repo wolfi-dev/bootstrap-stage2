@@ -27,59 +27,50 @@ jobs:
         shell: bash
 
       - uses: actions/checkout@v3
-      - run: echo "${{ secrets.STAGE2_BOOTSTRAP_RSA }}" > ./bootstrap-stage2.rsa
+      - run: echo "${{ secrets.MELANGE_RSA }}" > ./melange.rsa
       - run: |
           sudo mkdir -p /etc/apk/keys
-          sudo cp ./bootstrap-stage2.rsa.pub /etc/apk/keys/bootstrap-stage2.rsa.pub
+          sudo cp ./melange.rsa.pub /etc/apk/keys/melange.rsa.pub
 
       - uses: chainguard-dev/actions/setup-melange@main
 
       - uses: chainguard-dev/actions/inky-build-pkg@main
         with:
           package-name: m4
-          signing-key-name: bootstrap-stage2.rsa
 
       - uses: chainguard-dev/actions/inky-build-pkg@main
         with:
           package-name: ncurses
-          signing-key-name: bootstrap-stage2.rsa
 
       - uses: chainguard-dev/actions/inky-build-pkg@main
         with:
           package-name: busybox
-          signing-key-name: bootstrap-stage2.rsa
           empty-workspace: false
           source-dir: ${{ github.workspace }}/busybox
 
       - uses: chainguard-dev/actions/inky-build-pkg@main
         with:
           package-name: file
-          signing-key-name: bootstrap-stage2.rsa
 
       - uses: chainguard-dev/actions/inky-build-pkg@main
         with:
           package-name: gawk
-          signing-key-name: bootstrap-stage2.rsa
 
       - uses: chainguard-dev/actions/inky-build-pkg@main
         with:
           package-name: grep
-          signing-key-name: bootstrap-stage2.rsa
 
       - uses: chainguard-dev/actions/inky-build-pkg@main
         with:
           package-name: gzip
-          signing-key-name: bootstrap-stage2.rsa
 
       - uses: chainguard-dev/actions/inky-build-pkg@main
         with:
           package-name: make
-          signing-key-name: bootstrap-stage2.rsa
 
       - uses: chainguard-dev/actions/inky-build-pkg@main
         with:
           package-name: patch
-          signing-key-name: bootstrap-stage2.rsa
 
 #      - id: auth
 #        name: 'Authenticate to Google Cloud'
