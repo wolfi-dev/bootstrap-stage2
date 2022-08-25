@@ -37,7 +37,8 @@ environment:
 pipeline:
   - uses: fetch
     with:
-      uri: https://invisible-mirror.net/archives/ncurses/current/ncurses-${{package.version}}-20220820.tgz
+#      uri: https://invisible-mirror.net/archives/ncurses/current/ncurses-${{package.version}}-20220820.tgz
+      uri: https://distfiles.alpinelinux.org/distfiles/edge/ncurses-${{package.version}}-20220820.tgz
       expected-sha256: 7b810b01f71609fd31107a0b7794d0940d3ecc10c98ba19e83749419ba0934b9
   - name: Configure
     runs: |
