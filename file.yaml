@@ -42,6 +42,7 @@ pipeline:
   - name: Configure
     runs: |
       ./configure \
+         --host=$(uname -m)-pc-linux-gnu \
          --target=$(uname -m)-pc-linux-gnu \
          --prefix=/usr \
          --datadir=/usr/share
