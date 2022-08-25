@@ -1,7 +1,7 @@
 package:
   name: mpfr
   version: 4.1.0
-  epoch: 0
+  epoch: 1
   description: "multiple-precision floating-point library"
   target-architecture:
     - all
@@ -50,12 +50,18 @@ pipeline:
         --enable-shared
   - uses: autoconf/make
   - uses: autoconf/make-install
+  - name: 'Clean up documentation'
+    runs: |
+      rm -rf ${{targets.destdir}}/usr/share/info
 
 subpackages:
   - name: "cross-mpfr"
     pipeline:
       - runs: |
           make install DESTDIR="${{targets.subpkgdir}}/usr/$(uname -m)-pc-linux-gnu"
+      - name: 'Clean up documentation'
+        runs: |
+          rm -rf ${{targets.subpkgdir}}/usr/$(uname -m)-pc-linux-gnu/usr/share/info
     options:
       no-provides: true
       no-depends: true
