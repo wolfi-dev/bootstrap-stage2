@@ -1,0 +1,50 @@
+package:
+  name: sed
+  version: 4.8
+  epoch: 0
+  description: "GNU stream editor"
+  target-architecture:
+    - all
+  copyright:
+    - paths:
+      - "*"
+      attestation: TODO
+      license: GPL-3.0-or-later
+  dependencies:
+    runtime:
+
+environment:
+  contents:
+    repositories:
+      - https://dl-cdn.alpinelinux.org/alpine/edge/main
+      - https://packages.wolfi.dev/bootstrap/stage1
+    keyring:
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-4a6a0840.rsa.pub
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-5261cecb.rsa.pub
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-6165ee59.rsa.pub
+      - https://packages.wolfi.dev/bootstrap/stage1/melange.rsa.pub
+    packages:
+      - busybox
+      - ssl_client
+      - ca-certificates-bundle
+      - build-base
+      - cross-gcc-stage1
+      - cross-binutils-stage1
+      - cross-glibc-stage1
+      - cross-linux-headers
+
+pipeline:
+  - uses: fetch
+    with:
+      uri: https://ftp.gnu.org/gnu/sed/sed-${{package.version}}.tar.gz
+      expected-sha256: 53cf3e14c71f3a149f29d13a0da64120b3c1d3334fba39c4af3e520be053982a
+  - name: Configure
+    runs: |
+      ./configure \
+         --host=$(uname -m)-pc-linux-gnu \
+         --target=$(uname -m)-pc-linux-gnu \
+         --prefix=/usr \
+         --datadir=/usr/share
+  - uses: autoconf/make
+  - uses: autoconf/make-install
+  - uses: strip
