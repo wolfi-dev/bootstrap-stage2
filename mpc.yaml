@@ -1,0 +1,62 @@
+package:
+  name: mpc
+  version: 1.2.1
+  epoch: 0
+  description: "multiple-precision C library"
+  target-architecture:
+    - all
+  copyright:
+    - paths:
+      - "*"
+      attestation: TODO
+      license: LGPL-3.0-or-later
+  dependencies:
+    runtime:
+
+environment:
+  contents:
+    repositories:
+      - https://dl-cdn.alpinelinux.org/alpine/edge/main
+      - https://packages.wolfi.dev/bootstrap/stage1
+    keyring:
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-4a6a0840.rsa.pub
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-5261cecb.rsa.pub
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-6165ee59.rsa.pub
+      - https://packages.wolfi.dev/bootstrap/stage1/melange.rsa.pub
+    packages:
+      - alpine-baselayout
+      - busybox
+      - build-base
+      - ca-certificates-bundle
+      - cross-gcc-stage1
+      - cross-binutils-stage1
+      - cross-glibc-stage1
+      - cross-libstdc++-stage1
+      - cross-linux-headers
+      - cross-gmp
+      - cross-mpfr
+
+pipeline:
+  - uses: fetch
+    with:
+      uri: https://ftp.gnu.org/gnu/mpc/mpc-${{package.version}}.tar.gz
+      expected-sha256: 17503d2c395dfcf106b622dc142683c1199431d095367c6aacba6eec30340459
+  - runs: |
+      EGREP=egrep ./configure \
+        --host=$(uname -m)-pc-linux-gnu \
+        --target=$(uname -m)-pc-linux-gnu \
+        --with-sysroot=/usr/$(uname -m)-pc-linux-gnu \
+        --prefix=/usr \
+        --enable-shared
+  - uses: autoconf/make
+  - uses: autoconf/make-install
+
+subpackages:
+  - name: "cross-mpc"
+    pipeline:
+      - runs: |
+          make install DESTDIR="${{targets.subpkgdir}}/usr/$(uname -m)-pc-linux-gnu"
+    options:
+      no-provides: true
+      no-depends: true
+      no-commands: true
