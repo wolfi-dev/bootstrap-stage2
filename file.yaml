@@ -1,0 +1,50 @@
+package:
+  name: file
+  version: 5.42
+  epoch: 0
+  description: "file-type identification utility"
+  target-architecture:
+    - all
+  copyright:
+    - paths:
+      - "*"
+      attestation: TODO
+      license: BSD-2-Clause
+  dependencies:
+    runtime:
+
+environment:
+  contents:
+    repositories:
+      - https://dl-cdn.alpinelinux.org/alpine/edge/main
+      - https://packages.wolfi.dev/bootstrap/stage1
+    keyring:
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-4a6a0840.rsa.pub
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-5261cecb.rsa.pub
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-6165ee59.rsa.pub
+      - https://packages.wolfi.dev/bootstrap/stage1/melange.rsa.pub
+    packages:
+      - busybox
+      - ssl_client
+      - ca-certificates-bundle
+      - build-base
+      - file
+      - cross-gcc-stage1
+      - cross-binutils-stage1
+      - cross-glibc-stage1
+      - cross-linux-headers
+
+pipeline:
+  - uses: fetch
+    with:
+      uri: http://ftp.astron.com/pub/file/file-${{package.version}}.tar.gz
+      expected-sha256: c076fb4d029c74073f15c43361ef572cfb868407d347190ba834af3b1639b0e4
+  - name: Configure
+    runs: |
+      ./configure \
+         --target=$(uname -m)-pc-linux-gnu \
+         --prefix=/usr \
+         --datadir=/usr/share
+  - uses: autoconf/make
+  - uses: autoconf/make-install
+  - uses: strip
