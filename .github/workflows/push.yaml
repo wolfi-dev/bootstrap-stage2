@@ -44,6 +44,13 @@ jobs:
           package-name: ncurses
           signing-key-name: bootstrap-stage2.rsa
 
+      - uses: chainguard-dev/actions/inky-build-pkg@main
+        with:
+          package-name: busybox
+          signing-key-name: bootstrap-stage2.rsa
+          empty-workspace: false
+          source-dir: ${{ github.workspace }}/busybox
+
 #      - id: auth
 #        name: 'Authenticate to Google Cloud'
 #        uses: google-github-actions/auth@v0
