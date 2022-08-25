@@ -37,6 +37,7 @@ jobs:
       - uses: chainguard-dev/actions/inky-build-pkg@main
         with:
           package-name: m4
+          signing-key-name: bootstrap-stage2.rsa
 
 #      - id: auth
 #        name: 'Authenticate to Google Cloud'
