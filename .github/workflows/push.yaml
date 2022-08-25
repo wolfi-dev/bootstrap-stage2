@@ -86,6 +86,8 @@ jobs:
       - uses: chainguard-dev/actions/inky-build-pkg@main
         with:
           package-name: cross-pkgconf
+          empty-workspace: false
+          source-dir: ${{ github.workspace }}/cross-pkgconf
 
       - uses: chainguard-dev/actions/inky-build-pkg@main
         with:
