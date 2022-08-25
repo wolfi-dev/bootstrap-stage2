@@ -1,0 +1,51 @@
+package:
+  name: make
+  version: 4.3
+  epoch: 0
+  description: "GNU make"
+  target-architecture:
+    - all
+  copyright:
+    - paths:
+      - "*"
+      attestation: TODO
+      license: GPL-3.0-or-later
+  dependencies:
+    runtime:
+
+environment:
+  contents:
+    repositories:
+      - https://dl-cdn.alpinelinux.org/alpine/edge/main
+      - https://packages.wolfi.dev/bootstrap/stage1
+    keyring:
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-4a6a0840.rsa.pub
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-5261cecb.rsa.pub
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-6165ee59.rsa.pub
+      - https://packages.wolfi.dev/bootstrap/stage1/melange.rsa.pub
+    packages:
+      - busybox
+      - ssl_client
+      - ca-certificates-bundle
+      - build-base
+      - cross-gcc-stage1
+      - cross-binutils-stage1
+      - cross-glibc-stage1
+      - cross-linux-headers
+
+pipeline:
+  - uses: fetch
+    with:
+      uri: https://ftp.gnu.org/gnu/make/make-${{package.version}}.tar.gz
+      expected-sha256: e05fdde47c5f7ca45cb697e973894ff4f5d79e13b750ed57d7b66d8defc78e19
+  - name: Configure
+    runs: |
+      ./configure \
+         --host=$(uname -m)-pc-linux-gnu \
+         --target=$(uname -m)-pc-linux-gnu \
+         --prefix=/usr \
+         --datadir=/usr/share \
+         --without-guile
+  - uses: autoconf/make
+  - uses: autoconf/make-install
+  - uses: strip
