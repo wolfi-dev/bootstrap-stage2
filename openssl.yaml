@@ -1,0 +1,78 @@
+package:
+  name: openssl
+  version: 3.0.5
+  epoch: 0
+  description: "Library and CLI tools for XZ and LZMA compressed files"
+  target-architecture:
+    - all
+  copyright:
+    - paths:
+      - "*"
+      attestation: TODO
+      license: Apache-2.0
+  dependencies:
+    runtime:
+
+environment:
+  contents:
+    repositories:
+      - https://dl-cdn.alpinelinux.org/alpine/edge/main
+      - https://packages.wolfi.dev/bootstrap/stage1
+    keyring:
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-4a6a0840.rsa.pub
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-5261cecb.rsa.pub
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-6165ee59.rsa.pub
+      - https://packages.wolfi.dev/bootstrap/stage1/melange.rsa.pub
+    packages:
+      - busybox
+      - ssl_client
+      - ca-certificates-bundle
+      - cross-gcc-stage1
+      - cross-binutils-stage1
+      - cross-glibc-stage1
+      - cross-libstdc++-stage1
+      - cross-linux-headers
+      - perl
+
+pipeline:
+  - uses: fetch
+    with:
+      uri: https://www.openssl.org/source/openssl-${{package.version}}.tar.gz
+      expected-sha256: aa7d8d9bef71ad6525c55ba11e5f4397889ce49c2c9349dcea6d3e4f0b024a7a
+  - name: Configure and build
+    runs: |
+      export CC=$(uname -m)-pc-linux-gnu-gcc
+      export CXX=$(uname -m)-pc-linux-gnu-g++
+      export CPP=$(uname -m)-pc-linux-gnu-cpp
+
+      perl ./Configure \
+         linux-x86_64 \
+         --prefix=/usr \
+         --libdir=lib \
+         --openssldir=/etc/ssl \
+         enable-ktls \
+         shared \
+         no-zlib \
+         no-async \
+         no-comp \
+         no-idea \
+         no-mdc2 \
+         no-rc5 \
+         no-ec2m \
+         no-sm2 \
+         no-sm4 \
+         no-ssl3 \
+         no-seed \
+         no-weak-ssl-ciphers \
+         -Wa,--noexecstack
+      make -j$(nproc)
+  - uses: autoconf/make-install
+  - runs: |
+      rm ${{targets.destdir}}/usr/bin/c_rehash
+  - uses: strip
+
+subpackages:
+  - name: "cross-openssl"
+    pipeline:
+      - runs: |
+          make install DESTDIR="${{targets.subpkgdir}}/usr/$(uname -m)-pc-linux-gnu"
