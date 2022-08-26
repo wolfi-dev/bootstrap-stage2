@@ -148,10 +148,14 @@ jobs:
       - uses: chainguard-dev/actions/inky-build-pkg@main
         with:
           package-name: wolfi-baselayout
+          empty-workspace: false
+          source-dir: ${{ github.workspace }}/wolfi-baselayout
 
       - uses: chainguard-dev/actions/inky-build-pkg@main
         with:
           package-name: glibc
+          empty-workspace: false
+          source-dir: ${{ github.workspace }}/glibc
 
       - uses: chainguard-dev/actions/inky-build-pkg@main
         with:
