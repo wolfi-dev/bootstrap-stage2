@@ -1,7 +1,7 @@
 package:
   name: apk-tools
   version: 2.12.9
-  epoch: 0
+  epoch: 1
   description: "apk-tools (Wolfi package manager)"
   target-architecture:
     - all
@@ -53,6 +53,7 @@ pipeline:
   - runs: |
       make LUA="no" AR="$(uname -m)-pc-linux-gnu-ar" \
         CC="$(uname -m)-pc-linux-gnu-gcc" PKG_CONFIG="$(uname -m)-pc-linux-gnu-pkg-config" V=1 \
+        DESTDIR="${{targets.destdir}}" \
         install
 
       install -d "${{targets.destdir}}"/var/lib/apk
