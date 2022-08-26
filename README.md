@@ -19,7 +19,7 @@ $ doas make MELANGE_DIR=../path/to/melange/sources
 ...
 ```
 
-After a while, you will have a built stage1 toolchain package set, signed
+After a while, you will have a built stage2 toolchain package set, signed
 with a local signing key (`local-melange.rsa.pub`).
 
 This can then be used to build the stage3 packages.
