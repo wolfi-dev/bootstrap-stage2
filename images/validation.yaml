@@ -1,0 +1,15 @@
+contents:
+  keyring:
+    - https://packages.wolfi.dev/bootstrap/stage2/melange.rsa.pub
+  repositories:
+    - https://packages.wolfi.dev/bootstrap/stage2
+  packages:
+    - busybox
+    - build-base
+    - apk-tools
+
+cmd: /bin/sh -l
+  
+# optional environment configuration
+environment:
+  PATH: /usr/sbin:/sbin:/usr/bin:/bin
