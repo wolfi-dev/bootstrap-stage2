@@ -143,6 +143,10 @@ jobs:
 
       - uses: chainguard-dev/actions/inky-build-pkg@main
         with:
+          package-name: linux-headers
+
+      - uses: chainguard-dev/actions/inky-build-pkg@main
+        with:
           package-name: glibc
 
       - id: auth
