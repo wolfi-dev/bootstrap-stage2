@@ -12,6 +12,17 @@ package:
       license: GPL-3.0-or-later
   dependencies:
     runtime:
+      - wolfi-baselayout
+  scriptlets:
+    trigger:
+      paths:
+        - /lib
+        - /lib64
+        - /usr/lib
+        - /usr/lib64
+      script: |
+        #!/bin/busybox sh
+        /sbin/ldconfig
 
 environment:
   contents:
@@ -72,4 +83,10 @@ pipeline:
       make -C build -j$(nproc)
   - runs: |
       make -C build -j$(nproc) install DESTDIR="${{targets.destdir}}"
+  - name: "Set up ldconfig"
+    runs: |
+      cp vendor/ld.so.conf "${{targets.destdir}}"/etc/ld.so.conf
+  - name: 'Clean up documentation'
+    runs: |
+      rm -rf ${{targets.destdir}}/usr/share/info
   - uses: strip
