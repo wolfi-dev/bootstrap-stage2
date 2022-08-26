@@ -147,6 +147,10 @@ jobs:
 
       - uses: chainguard-dev/actions/inky-build-pkg@main
         with:
+          package-name: wolfi-baselayout
+
+      - uses: chainguard-dev/actions/inky-build-pkg@main
+        with:
           package-name: glibc
 
       - uses: chainguard-dev/actions/inky-build-pkg@main
