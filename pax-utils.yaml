@@ -1,0 +1,54 @@
+package:
+  name: pax-utils
+  version: 1.3.4
+  epoch: 0
+  description: "ELF related utilities for 32-bit and 64-bit binaries"
+  target-architecture:
+    - all
+  copyright:
+    - paths:
+      - "*"
+      attestation: TODO
+      license: GPL-2.0-only
+  dependencies:
+    runtime:
+      - scanelf
+
+environment:
+  contents:
+    repositories:
+      - https://dl-cdn.alpinelinux.org/alpine/edge/main
+      - https://packages.wolfi.dev/bootstrap/stage1
+    keyring:
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-4a6a0840.rsa.pub
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-5261cecb.rsa.pub
+      - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-6165ee59.rsa.pub
+      - https://packages.wolfi.dev/bootstrap/stage1/melange.rsa.pub
+    packages:
+      - alpine-baselayout
+      - busybox
+      - perl
+      - ca-certificates-bundle
+      - xz
+      - cross-gcc-stage1
+      - cross-binutils-stage1
+      - cross-glibc-stage1
+      - cross-linux-headers
+
+pipeline:
+  - uses: fetch
+    with:
+      uri: https://dev.gentoo.org/~xen0n/distfiles/pax-utils-${{package.version}}.tar.xz
+      expected-sha256: 8baed2f9c5ae8e0cda1b9c75990864101afc64fad0a4616e10f3ff8ef891040b
+  - runs: |
+      make -j$(nproc) USE_CAP=no CC="$(uname -m)-pc-linux-gnu-gcc"
+  - uses: autoconf/make-install
+  - runs: |
+      rm -f "${{targets.destdir}}"/usr/bin/lddtree
+
+subpackages:
+  - name: "scanelf"
+    pipeline:
+      - runs: |
+          mkdir -p "${{targets.subpkgdir}}"/usr/bin
+          mv "${{targets.destdir}}"/usr/bin/scanelf "${{targets.subpkgdir}}"/usr/bin/scanelf
