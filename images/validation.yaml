@@ -1,6 +1,6 @@
 contents:
   keyring:
-    - https://packages.wolfi.dev/bootstrap/stage2/melange.rsa.pub
+    - https://packages.wolfi.dev/bootstrap/stage2/wolfi-signing.rsa.pub
   repositories:
     - https://packages.wolfi.dev/bootstrap/stage2
   packages:

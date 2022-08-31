@@ -32,7 +32,7 @@ environment:
       - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-4a6a0840.rsa.pub
       - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-5261cecb.rsa.pub
       - /usr/share/apk/keys/x86_64/alpine-devel@lists.alpinelinux.org-6165ee59.rsa.pub
-      - https://packages.wolfi.dev/bootstrap/stage1/melange.rsa.pub
+      - https://packages.wolfi.dev/bootstrap/stage1/wolfi-signing.rsa.pub
     packages:
       - busybox
       - ssl_client
