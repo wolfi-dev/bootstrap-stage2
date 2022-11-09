@@ -72,13 +72,13 @@ pipeline:
         --prefix=/ \
         --libdir=/lib \
         --includedir=/usr/include \
-        --host=$(uname -m)-pc-linux-gnu \
+        --host=${{host.triplet.gnu}} \
         --build=$(../config.guess) \
         --disable-nls \
         --disable-werror \
         --enable-kernel=4.9 \
-        --with-sysroot=/usr/$(uname -m)-pc-linux-gnu \
-        --with-headers=/usr/$(uname -m)-pc-linux-gnu/usr/include \
+        --with-sysroot=/usr/${{host.triplet.gnu}} \
+        --with-headers=/usr/${{host.triplet.gnu}}/usr/include \
         --disable-nls
   - runs: |
       make -C build -j$(nproc)

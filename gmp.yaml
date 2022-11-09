@@ -48,9 +48,9 @@ pipeline:
       autoreconf -vif
   - runs: |
       ./configure \
-        --host=$(uname -m)-pc-linux-gnu \
-        --target=$(uname -m)-pc-linux-gnu \
-        --with-sysroot=/usr/$(uname -m)-pc-linux-gnu \
+        --host=${{host.triplet.gnu}} \
+        --target=${{host.triplet.gnu}} \
+        --with-sysroot=/usr/${{host.triplet.gnu}} \
         --prefix=/usr \
         --enable-cxx \
         --with-pic
@@ -64,10 +64,10 @@ subpackages:
   - name: "cross-gmp"
     pipeline:
       - runs: |
-          make install pkgconfigdir="/usr/lib/pkgconfig" DESTDIR="${{targets.subpkgdir}}/usr/$(uname -m)-pc-linux-gnu"
+          make install pkgconfigdir="/usr/lib/pkgconfig" DESTDIR="${{targets.subpkgdir}}/usr/${{host.triplet.gnu}}"
       - name: 'Clean up documentation'
         runs: |
-          rm -rf ${{targets.subpkgdir}}/usr/$(uname -m)-pc-linux-gnu/usr/share/info
+          rm -rf ${{targets.subpkgdir}}/usr/${{host.triplet.gnu}}/usr/share/info
     options:
       no-provides: true
       no-depends: true

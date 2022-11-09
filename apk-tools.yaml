@@ -48,11 +48,11 @@ pipeline:
       sed -i -e 's:-Werror::' Make.rules
       echo "FULL_VERSION=${{package.version}}-r${{package.epoch}}" > config.mk
   - runs: |
-      make LUA="no" AR="$(uname -m)-pc-linux-gnu-ar" \
-        CC="$(uname -m)-pc-linux-gnu-gcc" PKG_CONFIG="$(uname -m)-pc-linux-gnu-pkg-config" V=1
+      make LUA="no" AR="${{host.triplet.gnu}}-ar" \
+        CC="${{host.triplet.gnu}}-gcc" PKG_CONFIG="${{host.triplet.gnu}}-pkg-config" V=1
   - runs: |
-      make LUA="no" AR="$(uname -m)-pc-linux-gnu-ar" \
-        CC="$(uname -m)-pc-linux-gnu-gcc" PKG_CONFIG="$(uname -m)-pc-linux-gnu-pkg-config" V=1 \
+      make LUA="no" AR="${{host.triplet.gnu}}-ar" \
+        CC="${{host.triplet.gnu}}-gcc" PKG_CONFIG="${{host.triplet.gnu}}-pkg-config" V=1 \
         DESTDIR="${{targets.destdir}}" \
         install
 

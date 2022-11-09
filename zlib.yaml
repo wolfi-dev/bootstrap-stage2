@@ -39,7 +39,7 @@ pipeline:
       uri: https://zlib.net/zlib-${{package.version}}.tar.gz
       expected-sha256: 91844808532e5ce316b3c010929493c0244f3d37593afd6de04f71821d5136d9
   - runs: |
-      CHOST="$(uname -m)-pc-linux-gnu" ./configure \
+      CHOST="${{host.triplet.gnu}}" ./configure \
         --prefix=/usr \
         --libdir=/lib \
         --shared
@@ -51,7 +51,7 @@ subpackages:
   - name: "cross-zlib"
     pipeline:
       - runs: |
-          make install pkgconfigdir="/usr/lib/pkgconfig" DESTDIR="${{targets.subpkgdir}}/usr/$(uname -m)-pc-linux-gnu"
+          make install pkgconfigdir="/usr/lib/pkgconfig" DESTDIR="${{targets.subpkgdir}}/usr/${{host.triplet.gnu}}"
     options:
       no-provides: true
       no-depends: true
