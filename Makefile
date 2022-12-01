@@ -82,158 +82,96 @@ all: ${KEY} ${PACKAGES}
 
 packages/${ARCH}/m4-${M4_VERSION}.apk:
 	${MELANGE} build m4.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/ncurses-${NCURSES_VERSION}.apk:
 	${MELANGE} build ncurses.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/busybox-${BUSYBOX_VERSION}.apk:
 	${MELANGE} build busybox.yaml ${MELANGE_OPTS} --source-dir ./busybox/
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/file-${FILE_VERSION}.apk:
 	${MELANGE} build file.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/gawk-${GAWK_VERSION}.apk:
 	${MELANGE} build gawk.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/grep-${GREP_VERSION}.apk:
 	${MELANGE} build grep.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/gzip-${GZIP_VERSION}.apk:
 	${MELANGE} build gzip.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/make-${GMAKE_VERSION}.apk:
 	${MELANGE} build make.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/patch-${PATCH_VERSION}.apk:
 	${MELANGE} build patch.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/sed-${SED_VERSION}.apk:
 	${MELANGE} build sed.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/xz-${XZ_VERSION}.apk:
 	${MELANGE} build xz.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/openssl-${OPENSSL_VERSION}.apk:
 	${MELANGE} build openssl.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/cross-pkgconf-${CROSS_PKGCONF_VERSION}.apk:
 	${MELANGE} build cross-pkgconf.yaml ${MELANGE_OPTS} --source-dir ./cross-pkgconf/
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/ca-certificates-${CA_CERTIFICATES_VERSION}.apk:
 	${MELANGE} build ca-certificates.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/wget-${WGET_VERSION}.apk:
 	${MELANGE} build wget.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/zlib-${ZLIB_VERSION}.apk:
 	${MELANGE} build zlib.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/apk-tools-${APK_TOOLS_VERSION}.apk:
 	${MELANGE} build apk-tools.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/binutils-${BINUTILS_VERSION}.apk:
 	${MELANGE} build binutils.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/pkgconf-${PKGCONF_VERSION}.apk:
 	${MELANGE} build pkgconf.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/bison-${BISON_VERSION}.apk:
 	${MELANGE} build bison.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/gmp-${GMP_VERSION}.apk:
 	${MELANGE} build gmp.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/mpfr-${MPFR_VERSION}.apk:
 	${MELANGE} build mpfr.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/mpc-${MPC_VERSION}.apk:
 	${MELANGE} build mpc.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/isl-${ISL_VERSION}.apk:
 	${MELANGE} build isl.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/gcc-${GCC_VERSION}.apk:
 	${MELANGE} build gcc.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/pax-utils-${PAX_UTILS_VERSION}.apk:
 	${MELANGE} build pax-utils.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/linux-headers-${LINUX_HEADERS_VERSION}.apk:
 	${MELANGE} build linux-headers.yaml ${MELANGE_OPTS} --source-dir ./glibc/
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/glibc-${GLIBC_VERSION}.apk:
 	${MELANGE} build glibc.yaml ${MELANGE_OPTS} --source-dir ./glibc/
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/wolfi-baselayout-${WOLFI_BASELAYOUT_VERSION}.apk:
 	${MELANGE} build wolfi-baselayout.yaml ${MELANGE_OPTS} --source-dir ./wolfi-baselayout/
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/libstdc++-${LIBSTDCXX_VERSION}.apk:
 	${MELANGE} build libstdc++.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 packages/${ARCH}/build-base-${BUILD_BASE_VERSION}.apk:
 	${MELANGE} build build-base.yaml ${MELANGE_OPTS} ${MELANGE_DEFOPTS}
-	apk index -o packages/${ARCH}/APKINDEX.tar.gz packages/${ARCH}/*.apk --allow-untrusted
-	melange sign-index --signing-key ${KEY} packages/${ARCH}/APKINDEX.tar.gz
 
 ${KEY}:
 	${MELANGE} keygen ${KEY}
