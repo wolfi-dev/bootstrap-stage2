@@ -64,10 +64,10 @@ pipeline:
       cd build
       ../configure \
         --build=$(uname -m)-alpine-linux-musl \
-        --host=${{host.triplet.gnu}} \
-        --target=${{host.triplet.gnu}} \
+        --host=${{cross.triplet.gnu.glibc}} \
+        --target=${{cross.triplet.gnu.glibc}} \
         --prefix=/usr \
-        --with-build-sysroot=/usr/${{host.triplet.gnu}} \
+        --with-build-sysroot=/usr/${{cross.triplet.gnu.glibc}} \
         --disable-nls \
         --disable-werror \
         --with-glibc-version=2.35 \

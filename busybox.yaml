@@ -53,7 +53,7 @@ pipeline:
     runs: |
       cp busyboxconfig .config
   - runs: |
-      make CC="${{host.triplet.gnu}}-gcc" V=1 -j$(nproc)
+      make CC="${{cross.triplet.gnu.glibc}}-gcc" V=1 -j$(nproc)
   - name: Install
     runs: |
       mkdir -p "${{targets.destdir}}"/usr/sbin

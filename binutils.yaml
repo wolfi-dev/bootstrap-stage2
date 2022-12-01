@@ -46,8 +46,8 @@ pipeline:
       ./configure \
         --prefix=/usr \
         --build=$(./config.guess) \
-        --host=${{host.triplet.gnu}} \
-        --target=${{host.triplet.gnu}} \
+        --host=${{cross.triplet.gnu.glibc}} \
+        --target=${{cross.triplet.gnu.glibc}} \
         --disable-nls \
         --disable-werror \
         --disable-multilib \

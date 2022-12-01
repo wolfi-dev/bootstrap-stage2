@@ -41,8 +41,8 @@ pipeline:
   - name: Configure
     runs: |
       ./configure \
-         --host=${{host.triplet.gnu}} \
-         --target=${{host.triplet.gnu}} \
+         --host=${{cross.triplet.gnu.glibc}} \
+         --target=${{cross.triplet.gnu.glibc}} \
          --prefix=/usr \
          --datadir=/usr/share \
          --without-guile

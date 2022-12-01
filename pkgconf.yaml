@@ -47,8 +47,8 @@ pipeline:
         --mandir=/usr/share/man \
         --infodir=/usr/share/info \
         --with-pkg-config-dir=/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig \
-        --host=${{host.triplet.gnu}} \
-        --target=${{host.triplet.gnu}}
+        --host=${{cross.triplet.gnu.glibc}} \
+        --target=${{cross.triplet.gnu.glibc}}
   - runs: |
       make -j$(nproc) V=1
   - uses: autoconf/make-install

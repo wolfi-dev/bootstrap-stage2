@@ -32,6 +32,6 @@ pipeline:
     runs: |
       mkdir -p "${{targets.destdir}}"/usr/bin
       mkdir -p "${{targets.destdir}}"/usr/share/pkgconfig/personality.d
-      install -m644 ${{host.triplet.gnu}}.personality \
-        "${{targets.destdir}}"/usr/share/pkgconfig/personality.d/${{host.triplet.gnu}}.personality
-      ln -sf /usr/bin/pkgconf "${{targets.destdir}}"/usr/bin/${{host.triplet.gnu}}-pkg-config
+      install -m644 ${{cross.triplet.gnu.glibc}}.personality \
+        "${{targets.destdir}}"/usr/share/pkgconfig/personality.d/${{cross.triplet.gnu.glibc}}.personality
+      ln -sf /usr/bin/pkgconf "${{targets.destdir}}"/usr/bin/${{cross.triplet.gnu.glibc}}-pkg-config

@@ -42,8 +42,8 @@ pipeline:
     runs: |
       export DEFS="NO_ASM"
       ./configure \
-         --host=${{host.triplet.gnu}} \
-         --target=${{host.triplet.gnu}} \
+         --host=${{cross.triplet.gnu.glibc}} \
+         --target=${{cross.triplet.gnu.glibc}} \
          --prefix=/usr \
          --datadir=/usr/share
   - uses: autoconf/make

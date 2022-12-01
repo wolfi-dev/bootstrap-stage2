@@ -42,10 +42,10 @@ pipeline:
       expected-sha256: 26e6e4d60ad59b3fff9948eb36743f0c874e124e410ef5bab930d0f546bc580d
   - runs: |
       ./configure \
-        --build=$(uname -m)-alpine-linux-musl \
-        --host=${{host.triplet.gnu}} \
-        --target=${{host.triplet.gnu}} \
-        --with-sysroot=/usr/${{host.triplet.gnu}} \
+        --build=${{host.triplet.gnu}} \
+        --host=${{cross.triplet.gnu.glibc}} \
+        --target=${{cross.triplet.gnu.glibc}} \
+        --with-sysroot=/usr/${{cross.triplet.gnu.glibc}} \
         --prefix=/usr \
         --enable-shared
   - uses: autoconf/make
@@ -55,7 +55,7 @@ subpackages:
   - name: "cross-isl"
     pipeline:
       - runs: |
-          make install DESTDIR="${{targets.subpkgdir}}/usr/${{host.triplet.gnu}}"
+          make install DESTDIR="${{targets.subpkgdir}}/usr/${{cross.triplet.gnu.glibc}}"
     options:
       no-provides: true
       no-depends: true

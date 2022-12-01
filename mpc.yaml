@@ -43,9 +43,9 @@ pipeline:
       expected-sha256: 17503d2c395dfcf106b622dc142683c1199431d095367c6aacba6eec30340459
   - runs: |
       EGREP=egrep ./configure \
-        --host=${{host.triplet.gnu}} \
-        --target=${{host.triplet.gnu}} \
-        --with-sysroot=/usr/${{host.triplet.gnu}} \
+        --host=${{cross.triplet.gnu.glibc}} \
+        --target=${{cross.triplet.gnu.glibc}} \
+        --with-sysroot=/usr/${{cross.triplet.gnu.glibc}} \
         --prefix=/usr \
         --enable-shared
   - uses: autoconf/make
@@ -55,7 +55,7 @@ subpackages:
   - name: "cross-mpc"
     pipeline:
       - runs: |
-          make install DESTDIR="${{targets.subpkgdir}}/usr/${{host.triplet.gnu}}"
+          make install DESTDIR="${{targets.subpkgdir}}/usr/${{cross.triplet.gnu.glibc}}"
     options:
       no-provides: true
       no-depends: true

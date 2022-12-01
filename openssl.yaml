@@ -41,9 +41,9 @@ pipeline:
       expected-sha256: aa7d8d9bef71ad6525c55ba11e5f4397889ce49c2c9349dcea6d3e4f0b024a7a
   - name: Configure and build
     runs: |
-      export CC=${{host.triplet.gnu}}-gcc
-      export CXX=${{host.triplet.gnu}}-g++
-      export CPP=${{host.triplet.gnu}}-cpp
+      export CC=${{cross.triplet.gnu.glibc}}-gcc
+      export CXX=${{cross.triplet.gnu.glibc}}-g++
+      export CPP=${{cross.triplet.gnu.glibc}}-cpp
 
       perl ./Configure \
          linux-x86_64 \
@@ -75,7 +75,7 @@ subpackages:
   - name: "cross-openssl"
     pipeline:
       - runs: |
-          make install DESTDIR="${{targets.subpkgdir}}/usr/${{host.triplet.gnu}}"
+          make install DESTDIR="${{targets.subpkgdir}}/usr/${{cross.triplet.gnu.glibc}}"
     options:
       no-commands: true
       no-provides: true

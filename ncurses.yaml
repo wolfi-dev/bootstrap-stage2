@@ -44,7 +44,7 @@ pipeline:
     runs: |
         ./configure \
           --prefix=/usr \
-          --host=${{host.triplet.gnu}} \
+          --host=${{cross.triplet.gnu.glibc}} \
           --mandir=/usr/share/man \
           --without-ada \
           --without-tests \
