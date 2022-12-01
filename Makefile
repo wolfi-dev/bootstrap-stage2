@@ -41,7 +41,8 @@ MELANGE_OPTS ?= \
 	--keyring-append ${KEY}.pub \
 	--signing-key ${KEY} \
 	--pipeline-dir ${MELANGE_DIR}/pipelines \
-	--arch ${ARCH}
+	--arch ${ARCH} \
+	--strip-origin-name
 
 MELANGE_DEFOPTS ?= --empty-workspace
 
