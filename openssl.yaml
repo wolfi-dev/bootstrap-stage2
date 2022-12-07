@@ -46,7 +46,7 @@ pipeline:
       export CPP=${{cross.triplet.gnu.glibc}}-cpp
 
       perl ./Configure \
-         linux-x86_64 \
+         linux-$(uname -m) \
          --prefix=/usr \
          --libdir=lib \
          --openssldir=/etc/ssl \
