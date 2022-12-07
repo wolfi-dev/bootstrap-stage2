@@ -1,5 +1,5 @@
-Triplet: aarch64-pc-linux-gnu
+Triplet: aarch64-unknown-linux-gnu
 SysrootDir: /
-DefaultSearchPaths: /usr/aarch64-pc-linux-gnu/usr/lib/pkgconfig:/usr/aarch64-pc-linux-gnu/usr/share/pkgconfig
-SystemIncludePaths: /usr/aarch64-pc-linux-gnu/usr/include
-SystemLibraryPaths: /usr/aarch64-pc-linux-gnu/lib:/usr/aarch64-pc-linux-gnu/usr/lib
+DefaultSearchPaths: /usr/aarch64-unknown-linux-gnu/usr/lib/pkgconfig:/usr/aarch64-unknown-linux-gnu/usr/share/pkgconfig
+SystemIncludePaths: /usr/aarch64-unknown-linux-gnu/usr/include
+SystemLibraryPaths: /usr/aarch64-unknown-linux-gnu/lib:/usr/aarch64-unknown-linux-gnu/usr/lib
