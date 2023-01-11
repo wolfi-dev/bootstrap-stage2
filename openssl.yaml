@@ -47,8 +47,13 @@ pipeline:
       export CXX=${{cross.triplet.gnu.glibc}}-g++
       export CPP=${{cross.triplet.gnu.glibc}}-cpp
 
+      case "$(uname -m)" in
+      arm*) target="armv4"
+      *) target="$(uname -m)"
+      esac
+
       perl ./Configure \
-         linux-$(uname -m) \
+         linux-$target \
          --prefix=/usr \
          --libdir=lib \
          --openssldir=/etc/ssl \
