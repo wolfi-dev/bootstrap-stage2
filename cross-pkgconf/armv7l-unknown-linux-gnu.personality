@@ -1,0 +1,5 @@
+Triplet: armv7l-unknown-linux-gnu
+SysrootDir: /
+DefaultSearchPaths: /usr/armv7l-unknown-linux-gnu/usr/lib/pkgconfig:/usr/armv7l-unknown-linux-gnu/usr/share/pkgconfig
+SystemIncludePaths: /usr/armv7l-unknown-linux-gnu/usr/include
+SystemLibraryPaths: /usr/armv7l-unknown-linux-gnu/lib:/usr/armv7l-unknown-linux-gnu/usr/lib
